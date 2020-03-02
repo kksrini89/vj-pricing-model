@@ -1,7 +1,7 @@
 {
-  "name": "vj-auto-carousel",
+  "name": "vj-pricing-model",
   "version": "1.0.0",
-  "description": "Auto carousel vanilla js web component",
+  "description": "Pricing model Vanilla JavaScript Web Component",
   "main": "index.js",
   "dependencies": {},
   "devDependencies": {
@@ -12,17 +12,18 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/kksrini89/vj-auto-carousel.git"
+    "url": "git+https://github.com/kksrini89/vj-pricing-model.git"
   },
   "keywords": [
-    "auto-carousel",
+    "pricing-model",
+    "vj-pricing-model",
     "webcomponent",
     "vanillajs-wecomponent"
   ],
   "author": "Srinivasan K K",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/kksrini89/vj-auto-carousel/issues"
+    "url": "https://github.com/kksrini89/vj-pricing-model/issues"
   },
-  "homepage": "https://github.com/kksrini89/vj-auto-carousel#readme"
+  "homepage": "https://github.com/kksrini89/vj-pricing-model#readme"
 }
