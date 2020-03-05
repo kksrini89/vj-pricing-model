@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Pricing Model Web Component</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="styles.css" />
     <!-- Loding Google Font -->
     <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Permanent+Marker&display=swap" />
 
@@ -12,9 +12,21 @@
     <script src="node_modules/@webcomponents/webcomponentsjs/webcomponents-loader.js"></script>
 
     <!-- vj-pricing-model web component -->
-    <script src="./index.js"></script>
+    <script type="module" src="./index.js"></script>
   </head>
   <body>
-    
+    <vj-pricing-container></vj-pricing-container>
+
+    <!-- To set vj-pricing-container config attribute -->
+    <script>
+      const element = document.getElementsByTagName('vj-pricing-container');
+      if (element && element.length > 0) {
+        const ele = element[0];
+        const config = JSON.stringify({
+          categoryCount: 3
+        });
+        ele.setAttribute('config', config);
+      }
+    </script>
   </body>
 </html>
