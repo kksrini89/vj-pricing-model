@@ -62,9 +62,54 @@ template.innerHTML = `
   }
 
   .action .btn {
+    font-size: 18px;
+    text-transform: capitalize;
     margin: 5px 0;
     padding:10px;
     width: 100%;
+    box-shadow: 0 0 0 3px rgba(54,54,54,0.03);
+    border: none;
+  }
+
+  .btn {
+    position: relative;
+    cursor: pointer;
+    margin: 0 auto;
+    transition: all 0.4s ease-in;
+  }
+  //start click effect
+  .btn:before {
+    content: '';
+    background-color: aliceblue;
+    border-radius: 50%;
+    display: block;
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    transform: scale(0.001, 0.001);
+  }
+  &:focus {
+    outline: 0;
+    color: #fff;
+    &:before {
+      animation: click_effect 0.8s ease-out;
+    }
+  }
+  @keyframes click_effect {
+    50% {
+      transform: scale(1.5, 1.5);
+      opacity: 0;
+    }
+    99% {
+      transform: scale(0.001, 0.001);
+      opacity: 0;
+    }
+    100% {
+      transform: scale(0.001, 0.001);
+      opacity: 1;
+    }
   }
 
   /* Media Queries */

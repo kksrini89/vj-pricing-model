@@ -9,7 +9,7 @@
         },
         "features" : ["unlimited sites", "Upto 125 Devices", "FREE SSL" , "VPS Hosting"],
         "call_to_action" : {
-          "text" : "Get Started",
+          "text" : "go silver",
           "color" : "#FFF",
           "bgColor": "#1ab394"
         }
@@ -23,7 +23,7 @@
           "features" : ["unlimited sites", 
         "Upto 250 Devices", "FREE SSL" ,"VPS Hosting"],
           "call_to_action" : {
-            "text" : "get started",
+            "text" : "go gold",
             "color" : "#FFF",
             "bgColor": "#f8ac59"
           }
@@ -36,7 +36,7 @@
           },
           "features" : ["unlimited sites", "Upto 500 Devices", "FREE SSL" , "VPS Hosting"],
           "call_to_action" : {
-            "text" : "get started",
+            "text" : "go platinum",
             "color" : "#FFF",
             "bgColor": "#1c84c6"
           }
