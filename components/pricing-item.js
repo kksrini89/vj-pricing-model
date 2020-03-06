@@ -26,7 +26,6 @@ template.innerHTML = `
 
 <style>
   .container {
-    padding: 50px;
     width: 100%;
     display: grid;
     grid-gap: 20px;

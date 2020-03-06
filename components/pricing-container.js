@@ -55,24 +55,15 @@ class PricingContainerComponent extends HTMLElement {
     try {
       if (!this._config) throw `Config Input is required!`;
       if (!this._config.length) throw `Category Count property is required!`;
-      let categoryCount = this._config.length;
-      let data = this._config;
+      if (!this.$container) throw `Pricing Container element does not exists!`;
 
-      if (!this.$container) {
-        throw `Pricing Container element does not exists!`;
-      }
+      let data = this._config;
       // Create Pricing Item
       for (const d of data) {
         const item = document.createElement('vj-pricing-item');
         item.setAttribute('data', JSON.stringify(d));
         this.$container.appendChild(item);
       }
-      // while (categoryCount > 0) {
-      //   const item = document.createElement('vj-pricing-item');
-      //   item.setAttribute('data', JSON.stringify());
-      //   this.$container.appendChild(item);
-      //   categoryCount--;
-      // }
     } catch (error) {
       throw error;
     }
