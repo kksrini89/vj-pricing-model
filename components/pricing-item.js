@@ -32,6 +32,7 @@ template.innerHTML = `
     grid-auto-rows: 300px;
     grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
     max-width: 1200px;
+    --border-color: #ddd;
   }
 
   .package {
@@ -44,6 +45,15 @@ template.innerHTML = `
 
   .item {
     width: 100%;
+  }
+
+  .pkg-info {
+    font-size: 30px;
+    font-weight: bold;
+    padding: 10px;
+    text-align: center;
+    text-decoration: underline;
+    text-transform: uppercase;
   }
 
   .feature > .feature-list {

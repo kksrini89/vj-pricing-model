@@ -1,16 +1,5 @@
-:root {
-  --bg-color: #0400ff82;
-  --highlight-color: gray;
-  --border-color: white;
-}
-
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
 }
-
-body {
-  background-color: var(--bg-color);
-}
-
