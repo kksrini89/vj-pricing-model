@@ -19,13 +19,23 @@
 
     <!-- To set vj-pricing-container config attribute -->
     <script>
+      const fetchData = () => {
+        try {
+          return fetch(`data.json`).then(res => res.json());
+        } catch (error) {
+          throw error;
+        }
+      };
       const element = document.getElementsByTagName('vj-pricing-container');
       if (element && element.length > 0) {
         const ele = element[0];
-        const config = JSON.stringify({
-          categoryCount: 3
+        fetchData().then(data => {
+          if (!data) {
+            throw `Data is not available`;
+          }
+          const config = JSON.stringify(data);
+          ele.setAttribute('config', config);
         });
-        ele.setAttribute('config', config);
       }
     </script>
   </body>

@@ -1,24 +1,24 @@
 const template = document.createElement('template');
 template.innerHTML = `
 <main class="container">
-  <div class="item">
-    <div class="category ind">
-      <span class="category-name"></span>
-<!--  <slot name="category-name"></slot> -->
+  <div class="package">
+    <div class="pkg-info item">
+      <span class="package-name"></span>
+<!--  <slot name="package-name"></slot> -->
     </div>
-    <div class="price ind">
-      <span class="money"></span>
+    <div class="price item">
+      <span class="money-symbol"></span>
       <span class="money-value"></span>
     </div>
-    <div class="name ind"></div>
-    <div class="feature ind">
+    <!-- <div class="name item"></div> -->
+    <div class="feature item">
       <ul class="feature-list">
         <li>Reduces managing time</li>
         <li>Exposing yourself</li>
         <li>Quit thinking</li>
       </ul>
     </div>
-    <div class="action ind">
+    <div class="action item">
       <button class="btn">Select</button>
     </div>
   </div>
@@ -35,7 +35,7 @@ template.innerHTML = `
     max-width: 1200px;
   }
 
-  .item {
+  .package {
     border: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
@@ -43,7 +43,7 @@ template.innerHTML = `
     align-items: center;
   }
 
-  .ind {
+  .item {
     width: 100%;
   }
 
@@ -57,11 +57,11 @@ template.innerHTML = `
     margin: 10px;
   }
 
-  .item .action {
+  .action {
     width: 100%;
   }
 
-  .item .action .btn{
+  .action .btn {
     margin: 5px 0;
     padding:10px;
     width: 100%;
@@ -83,9 +83,59 @@ class PricingItemComponent extends HTMLElement {
   connectedCallback() {
     //   Shadow DOM
     this._shadowRoot.appendChild(template.content.cloneNode(true));
+
+    // element references
+    this.$pkgName = this._shadowRoot.querySelector('.pkg-info .package-name');
+    this.$moneySymbol = this._shadowRoot.querySelector('.price > .money-symbol');
+    this.$moneyValue = this._shadowRoot.querySelector('.price > .money-value');
+    this.$cta = this._shadowRoot.querySelector('.action .btn');
+
+    // this.updatePriceItem = this.updatePriceItem.bind(this);
+    if (this._data && Object.keys(this._data).length) this.updatePriceItem();
   }
 
-  attributeChangedCallback(name, oldVal, newVal) {}
+  static get observedAttributes() {
+    return ['data'];
+  }
+
+  attributeChangedCallback(name, oldVal, newVal) {
+    if (name === 'data' && newVal) {
+      this._data = JSON.parse(newVal);
+    }
+  }
+
+  updatePriceItem() {
+    try {
+      if (this._data) {
+        const {
+          package_name,
+          price: { symbol, value },
+          features,
+          call_to_action: { text, color, bgColor }
+        } = this._data;
+        if (package_name) {
+          this.$pkgName.textContent = package_name;
+        }
+        if (symbol) {
+          this.$moneySymbol.textContent = symbol;
+        }
+        if (value) {
+          this.$moneyValue.textContent = value;
+        }
+        if (text) {
+          this.$cta.textContent = text;
+        }
+        if (color) {
+          this.$cta.style.color = color;
+        }
+        if (bgColor) {
+          this.$cta.style.backgroundColor = bgColor;
+        }
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
 }
 
 customElements.define('vj-pricing-item', PricingItemComponent);

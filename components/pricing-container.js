@@ -43,7 +43,10 @@ class PricingContainerComponent extends HTMLElement {
 
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'config' && !!newVal) {
-      this._config = JSON.parse(newVal);
+      const config_input = JSON.parse(newVal);
+      if (config_input && config_input.hasOwnProperty('config')) {
+        this._config = config_input.config;
+      }
     }
   }
 
@@ -51,18 +54,25 @@ class PricingContainerComponent extends HTMLElement {
   createPricingItem() {
     try {
       if (!this._config) throw `Config Input is required!`;
-      let { categoryCount } = this._config;
-      if (!categoryCount) throw `Category Count property is required!`;
+      if (!this._config.length) throw `Category Count property is required!`;
+      let categoryCount = this._config.length;
+      let data = this._config;
 
       if (!this.$container) {
         throw `Pricing Container element does not exists!`;
       }
       // Create Pricing Item
-      while (categoryCount > 0) {
+      for (const d of data) {
         const item = document.createElement('vj-pricing-item');
+        item.setAttribute('data', JSON.stringify(d));
         this.$container.appendChild(item);
-        categoryCount--;
       }
+      // while (categoryCount > 0) {
+      //   const item = document.createElement('vj-pricing-item');
+      //   item.setAttribute('data', JSON.stringify());
+      //   this.$container.appendChild(item);
+      //   categoryCount--;
+      // }
     } catch (error) {
       throw error;
     }
