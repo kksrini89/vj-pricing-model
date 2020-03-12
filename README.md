@@ -4,7 +4,7 @@
 
 ## Final
 
-![Alt text](/vj-pricing-model/screenshots/DesktopView.png)
+![PricingModel Web Component](/screenshots/DesktopView.png)
 
 ## Install
 
