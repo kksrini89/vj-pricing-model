@@ -7,16 +7,15 @@ template.innerHTML = `
 <!--  <slot name="package-name"></slot> -->
     </div>
     <div class="price item">
-      <span class="money-symbol"></span>
-      <span class="money-value"></span>
+      <div>
+        <span class="money-symbol"></span>
+        <span class="money-value"></span>
+      </div>
+      <div class="term">Per Month</div>
     </div>
     <!-- <div class="name item"></div> -->
     <div class="feature item">
-      <ul class="feature-list">
-        <li>Reduces managing time</li>
-        <li>Exposing yourself</li>
-        <li>Quit thinking</li>
-      </ul>
+      <ul class="feature-list"></ul>
     </div>
     <div class="action item">
       <button class="btn">Select</button>
@@ -26,15 +25,10 @@ template.innerHTML = `
 
 <style>
   .container {
-    width: 100%;
-    display: grid;
-    grid-gap: 20px;
-    grid-auto-rows: 300px;
-    grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
-    max-width: 1200px;
     --border-color: #ddd;
+    font-family: 'Open Sans', sans-serif;
   }
-
+  
   .package {
     border: 1px solid var(--border-color);
     display: flex;
@@ -42,35 +36,48 @@ template.innerHTML = `
     justify-content: space-between;
     align-items: center;
   }
-
+  
   .item {
     width: 100%;
   }
-
+  
   .pkg-info {
-    font-size: 30px;
+    font-family: 'Open Sans', sans-serif;
+    font-size: 24px;
     font-weight: bold;
-    padding: 10px;
+    padding: 15px 0;
     text-align: center;
-    text-decoration: underline;
     text-transform: uppercase;
   }
 
-  .feature > .feature-list {
+  .price {
     background-color: #ddd;
+    padding: 15% 0;
+    text-align: center;
+    font-size: 3.5em;
+  }
+
+  .price .term {
+    font-size: 18px;
+    font-weight: bold;
+  }
+
+  .feature > .feature-list {
     list-style-type : none;
     padding: 10px;
   }
 
   .feature > .feature-list > li {
     margin: 10px;
+    text-align: center;
   }
 
   .action {
     width: 100%;
   }
-
+  
   .action .btn {
+    font-family: 'Open Sans', sans-serif;
     font-size: 18px;
     text-transform: capitalize;
     margin: 5px 0;
@@ -140,8 +147,12 @@ class PricingItemComponent extends HTMLElement {
 
     // element references
     this.$pkgName = this._shadowRoot.querySelector('.pkg-info .package-name');
-    this.$moneySymbol = this._shadowRoot.querySelector('.price > .money-symbol');
-    this.$moneyValue = this._shadowRoot.querySelector('.price > .money-value');
+    this.$priceElement = this._shadowRoot.querySelector('.price');
+    this.$moneySymbol = this._shadowRoot.querySelector('.price .money-symbol');
+    this.$moneyValue = this._shadowRoot.querySelector('.price .money-value');
+    
+    this.$features = this._shadowRoot.querySelector('.feature-list');
+
     this.$cta = this._shadowRoot.querySelector('.action .btn');
 
     // this.updatePriceItem = this.updatePriceItem.bind(this);
@@ -158,6 +169,18 @@ class PricingItemComponent extends HTMLElement {
     }
   }
 
+  addFeatureItem(content) {
+    try {
+      if (content) {
+        const li = document.createElement('li');
+        li.textContent = content;
+        return li;
+      }
+    } catch (error) {
+      throw error;
+    }
+  }
+
   updatePriceItem() {
     try {
       if (this._data) {
@@ -170,6 +193,7 @@ class PricingItemComponent extends HTMLElement {
         if (package_name) {
           this.$pkgName.textContent = package_name;
         }
+        this.$priceElement.style.color = bgColor;
         if (symbol) {
           this.$moneySymbol.textContent = symbol;
         }
@@ -184,6 +208,12 @@ class PricingItemComponent extends HTMLElement {
         }
         if (bgColor) {
           this.$cta.style.backgroundColor = bgColor;
+        }
+
+        if (features && features.length) {
+          for (const content of features) {
+            this.$features.appendChild(this.addFeatureItem(content));
+          }
         }
       }
     } catch (error) {

@@ -8,8 +8,7 @@ tmpl.innerHTML = `
     width: 100%;
     display: grid;
     grid-gap: 20px;
-    grid-auto-rows: 300px;
-    /*grid-template-rows: repeat(auto-fill, minmax(150px, 1fr)); */
+    grid-auto-rows: 1fr;
     grid-template-columns: repeat(auto-fill, minmax(250px,1fr));
     max-width: 1200px;
   }
