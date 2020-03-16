@@ -39,7 +39,7 @@ class PricingContainerComponent extends HTMLElement {
       this.createPricingItem();
     }
   }
-
+  
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'config' && !!newVal) {
       const config_input = JSON.parse(newVal);
@@ -48,20 +48,23 @@ class PricingContainerComponent extends HTMLElement {
       }
     }
   }
-
+  
   // Event Handlers
   createPricingItem() {
     try {
       if (!this._config) throw `Config Input is required!`;
       if (!this._config.length) throw `Category Count property is required!`;
       if (!this.$container) throw `Pricing Container element does not exists!`;
-
+      
       let data = this._config;
       // Create Pricing Item
       for (const d of data) {
         const item = document.createElement('vj-pricing-item');
         item.setAttribute('data', JSON.stringify(d));
         this.$container.appendChild(item);
+        item.addEventListener('item-selected', (e) => {
+          this.dispatchEvent(new CustomEvent('selected', { detail: e.detail }));
+        });
       }
     } catch (error) {
       throw error;

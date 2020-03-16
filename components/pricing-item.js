@@ -154,6 +154,7 @@ class PricingItemComponent extends HTMLElement {
     this.$features = this._shadowRoot.querySelector('.feature-list');
 
     this.$cta = this._shadowRoot.querySelector('.action .btn');
+    this.$cta.addEventListener('click', this.selectPricing.bind(this));
 
     // this.updatePriceItem = this.updatePriceItem.bind(this);
     if (this._data && Object.keys(this._data).length) this.updatePriceItem();
@@ -166,6 +167,14 @@ class PricingItemComponent extends HTMLElement {
   attributeChangedCallback(name, oldVal, newVal) {
     if (name === 'data' && newVal) {
       this._data = JSON.parse(newVal);
+    }
+  }
+
+  selectPricing() {
+    try {
+      this.dispatchEvent(new CustomEvent('item-selected', { detail: { pkgName: this._data.package_name } }));
+    } catch (error) {
+      throw error;
     }
   }
 

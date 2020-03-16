@@ -36,7 +36,11 @@
           const config = JSON.stringify(data);
           ele.setAttribute('config', config);
         });
+        ele.addEventListener('selected', (e) => {
+          console.log(e.detail);
+        });
       }
+      
     </script>
   </body>
 </html>

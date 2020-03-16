@@ -13,9 +13,11 @@
 ```
 
 ## Usage
+To use as a selector in the view,
 ```html
     <vj-pricing-container></vj-pricing-container>
 ```
+To assign config attribute value with different pricing plans as an array,
 ```javascript
 <script>
       const data = [{ 
@@ -39,10 +41,25 @@
       }
 </script>
 ```
+To get the selected pricing plan name
+```javascript
+const element = document.getElementsByTagName('vj-pricing-container');
+if (element && element.length > 0) {
+  const ele = element[0];
+  ele.addEventListener('selected', (e) => {
+    console.log(e.detail);
+  });
+}
+```
 
 ## Attributes
 ### config
 
+## Events
+### selected 
+Type: `Custom Event`
+
+To get the selected pricing plan name.
 
 ## License
 MIT &copy; [Srinivasan K K](https://srinivasankk.com)
